@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>Front</title>
+
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            outline: 0;
+            margin: 0;
+            padding: 0;
+            cursor: move;
+        }
+
+        #video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        #black-rectangle {
+            background: #000000;
+            position: absolute;
+            bottom: calc(3.125% - 16px);
+            left: 50%;
+            transform: translateX(-50%); 
+            z-index: -1;
+        }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.js"></script>
+</head>
+
+<body>
+    <div id="black-rectangle"></div>
+    <video id="video-background" autoplay playsinline muted></video>
+
+    <script src="data/leon.js"></script>
+    <script src="data/util.js"></script>
+    <script>
+        let leon;
+
+        function init() {
+            generateCanvas();
+
+            leon = new LeonSans({
+                text: 'Waiting for model loaded',
+                color: ['#ffffff'],
+                size: getSize(64),
+                weight: 200,
+                isWave: true,
+                pathGap: 0,
+                amplitude: 0,
+                fps: 30
+            });
+            blackRectangle = document.getElementById('black-rectangle');
+
+            connectWebSocket();
+            requestAnimationFrame(animate);
+        }
+
+        function animate(t) {
+            requestAnimationFrame(animate);
+
+            ctx.clearRect(0, 0, sw, sh);
+
+            const x = (sw - leon.rect.w) / 2;
+            const y = (sh - leon.rect.h) / 32 * 31;
+            leon.position(x + moveX, y + moveY);
+
+            leon.wave(ctx, t);
+            updateBlackRectangleSize();
+
+        }
+        function updateBlackRectangleSize() {
+            blackRectangle.style.width = leon.rect.w + 64 + 'px';
+            blackRectangle.style.height = leon.rect.h + 32 + 'px';
+        }
+
+        function connectWebSocket() {
+            const socket = new WebSocket('ws://localhost:8765');
+
+            socket.onmessage = function (event) {
+                const responseData = JSON.parse(event.data);
+                if (responseData.transcription){
+                    leon.text = responseData.transcription;
+                    console.log(`Received text: ${leon.text}`)
+                    if (responseData.emotion == "Angry"){
+                        console.log(`Received emotion: ${responseData.emotion}`);
+                        leon.color = ['#BE0000'];
+                        leon.weight = 400;
+                        leon.pathGap = 0.1;
+                        leon.amplitude = 0.2;
+                        leon.fps = 30;
+                    } 
+                    else if (responseData.emotion == "Disgust"){
+                        console.log(`Received emotion: ${responseData.emotion}`);
+                        leon.color = ['#8EC661'];
+                        leon.weight = 100;
+                        leon.pathGap = 0.5;
+                        leon.amplitude = 0.75;                        
+                        leon.fps = 10;
+                    } 
+                    else if (responseData.emotion == "Fear"){
+                        console.log(`Received emotion: ${responseData.emotion}`);
+                        leon.color = ['#693B95'];
+                        leon.weight = 100;
+                        leon.pathGap = 0;
+                        leon.amplitude = 0.25;                        
+                        leon.fps = 30;
+                    }
+                    else if (responseData.emotion == "Neutral" || responseData.emotion == "Not Detected"){
+                        console.log(`Received emotion: ${responseData.emotion}`);
+                        leon.color = ['#FFFFFF'];
+                        leon.weight = 200;
+                        leon.pathGap = 0;
+                        leon.amplitude = 0;
+                        leon.fps = 30;
+                    }
+                    else if (responseData.emotion == "Happy"){
+                        console.log(`Received emotion: ${responseData.emotion}`);
+                        leon.color = ['#F4CF30'];
+                        leon.weight = 300;
+                        leon.pathGap = 0.5;
+                        leon.amplitude = 0.1;
+                        leon.fps = 10;
+                    }
+                    else if (responseData.emotion == "Sad"){
+                        console.log(`Received emotion: ${responseData.emotion}`);
+                        leon.color = ['#2B65A8'];
+                        leon.weight = 100;
+                        leon.pathGap = 0.25;
+                        leon.amplitude = 0.5;
+                        leon.fps = 10;
+                    }
+                    else if (responseData.emotion == "Surprise"){
+                        console.log(`Received emotion   : ${responseData.emotion}`);
+                        leon.color = ['#F1891E'];
+                        leon.weight = 200;
+                        leon.pathGap = 0.2;
+                        leon.amplitude = 0.5;
+                        leon.fps = 60;
+                    }
+                }
+            };
+        }
+
+        window.onload = () => {
+            init();
+            initWebcam();
+            
+            const blackRectangle = document.getElementById('black-rectangle');
+            blackRectangle.style.width = leon.rect.w + 50 + 'px';
+            blackRectangle.style.height = leon.rect.h + 20+'px';
+        };
+
+        function initWebcam() {
+            const video = document.getElementById('video-background');
+
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then((stream) => {
+                    video.srcObject = stream;
+                })
+                .catch((error) => {
+                    console.error('Error accessing webcam:', error);
+                });
+        }
+    </script>
+</body>
+
+</html>
