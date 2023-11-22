@@ -1,9 +1,10 @@
 # cxd
 
-To run
+### To run
 1. python server.py
 2. open front.html
 
+### Explanation
 - record.py (record voice)
 - emotion.py (speech emotion recognition)
 - transcribe.py (speech to text)
