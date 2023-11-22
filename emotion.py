@@ -154,7 +154,7 @@ class speechEmotionRecognition:
         except:
             major_emotion = "Not Detected"
         return major_emotion
+    
 if __name__ == "__main__":
-
     x = speechEmotionRecognition.emotion_task("test.wav")
     print(x)

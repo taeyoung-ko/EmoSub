@@ -17,7 +17,7 @@ class SpeechToText:
         audio = self.load_audio(audio_path)
         mel = self.log_mel_spectrogram(audio)
 
-        options = whisper.DecodingOptions()
+        options = whisper.DecodingOptions(language='english')
         result = whisper.decode(self.model, mel, options)
 
         return result.text
@@ -26,5 +26,5 @@ class SpeechToText:
 if __name__ == "__main__":
     whisper_decoder = SpeechToText()
     while True:
-        result_text = whisper_decoder.decode_audio("test.wav")
+        result_text = whisper_decoder.decode_audio("test.wav",language='english')
         print(result_text)

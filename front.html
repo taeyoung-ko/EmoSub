@@ -47,8 +47,8 @@
     <div id="black-rectangle"></div>
     <video id="video-background" autoplay playsinline muted></video>
 
-    <script src="data/leon.js"></script>
-    <script src="data/util.js"></script>
+    <script src="leonsans/dist/leon.js"></script>
+    <script src="leonsans/examples/js/util.js"></script>
     <script>
         let leon;
 
@@ -99,6 +99,7 @@
                     console.log(`Received text: ${leon.text}`)
                     if (responseData.emotion == "Angry"){
                         console.log(`Received emotion: ${responseData.emotion}`);
+                        console.log()
                         leon.color = ['#BE0000'];
                         leon.weight = 400;
                         leon.pathGap = 0.1;

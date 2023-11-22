@@ -24,7 +24,8 @@ async def transcribe_task(whisper_decoder):
 async def send_data(websocket, path):
     recorder = AudioRecorder()
     whisper_decoder = SpeechToText()
-
+    previous_emotion = None
+    previous_text = None
     with concurrent.futures.ThreadPoolExecutor() as executor:
         while True:
             try:
@@ -37,12 +38,14 @@ async def send_data(websocket, path):
 
                 major_emotion = emotion_future.result()
                 text = transcribe_future.result()
+                if major_emotion != previous_emotion or text != previous_text:
+                    data = {'emotion': major_emotion, 'transcription': text}
+                    print(data)
+                    await websocket.send(json.dumps(data))
 
-                data = {'emotion': major_emotion, 'transcription': text}
-                print(data)
-
-                await websocket.send(json.dumps(data))
-                #await asyncio.sleep(0.1)
+                    # Update previous data
+                    previous_emotion = major_emotion
+                    previous_text = text
             except KeyboardInterrupt:
                 break
 
