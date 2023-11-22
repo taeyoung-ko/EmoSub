@@ -8,17 +8,16 @@ import json
 
 import concurrent.futures
 
-
-def record_audio(recorder):
+async def record_audio(recorder):
     recorded_frames = recorder.record_audio()
     filtered_frames = recorder.filter_noise(recorded_frames)
     recorder.save_audio(filtered_frames)
 
-def emotion_task():
+async def emotion_task():
     major_emotion = speechEmotionRecognition.emotion_task("recorded_audio.wav")
     return major_emotion
 
-def transcribe_task(whisper_decoder):
+async def transcribe_task(whisper_decoder):
     result_text = whisper_decoder.decode_audio("recorded_audio.wav")
     return result_text
 
@@ -29,12 +28,12 @@ async def send_data(websocket, path):
     with concurrent.futures.ThreadPoolExecutor() as executor:
         while True:
             try:
-                record_future = executor.submit(record_audio, recorder)
+                await record_audio(recorder)
 
-                emotion_future = executor.submit(emotion_task)
-                transcribe_future = executor.submit(transcribe_task, whisper_decoder)
+                emotion_future = asyncio.ensure_future(emotion_task())
+                transcribe_future = asyncio.ensure_future(transcribe_task(whisper_decoder))
 
-                record_result = record_future.result()
+                await asyncio.gather(emotion_future, transcribe_future)
 
                 major_emotion = emotion_future.result()
                 text = transcribe_future.result()
@@ -43,7 +42,7 @@ async def send_data(websocket, path):
                 print(data)
 
                 await websocket.send(json.dumps(data))
-                await asyncio.sleep(0.1)
+                #await asyncio.sleep(0.1)
             except KeyboardInterrupt:
                 break
 
@@ -52,3 +51,4 @@ start_server = websockets.serve(send_data, "localhost", 8765)
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
+
