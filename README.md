@@ -1,4 +1,4 @@
-# cxd
+# EmoSub
 
 ### To run
 1. python server.py
