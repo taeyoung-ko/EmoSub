@@ -9,7 +9,7 @@
 - emotion.py (speech emotion recognition)
 - transcribe.py (speech to text)
 - server.py (combine tasks & open server)
-- fromt.html (demo /w (LeonSans)[https://github.com/cmiscm/leonsans])
+- fromt.html (demo /w LeonSans[https://github.com/cmiscm/leonsans])
 
 ### Demo
 ![image](https://github.com/taeyoung-ko/cxd/assets/80334803/34f920d6-4001-4e56-ba07-c697960e57a1)
