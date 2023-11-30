@@ -1,9 +1,11 @@
 absl-py==2.0.0
 accelerate==0.20.3
 addict==2.4.0
+ailia @ file:///C:/Users/taeyoung/Desktop/AILIA_trial_1.2.15/ailia_1_215_0_trial/python
 aiofiles==23.1.0
 aiohttp==3.8.4
 aiosignal==1.3.1
+alabaster @ file:///home/ktietz/src/ci/alabaster_1611921544520/work
 albumentations==1.3.0
 alembic==1.12.1
 altair==5.0.1
@@ -15,7 +17,12 @@ annotator==0.14.2
 antlr4-python3-runtime==4.8
 anyio==3.7.1
 appdirs==1.4.4
+argon2-cffi @ file:///opt/conda/conda-bld/argon2-cffi_1645000214183/work
+argon2-cffi-bindings @ file:///C:/ci/argon2-cffi-bindings_1644551690056/work
+arrow @ file:///opt/conda/conda-bld/arrow_1649166651673/work
 asteroid-filterbanks==0.4.0
+astroid @ file:///C:/Windows/TEMP/abs_b0dtxgpicv/croots/recipe/astroid_1659023126745/work
+astropy @ file:///C:/ci/astropy_1657719656942/work
 astunparse==1.6.3
 async-timeout==4.0.2
 atomicwrites==1.4.0
@@ -32,6 +39,7 @@ backports.zoneinfo==0.2.1
 basicsr==1.4.2
 bcrypt @ file:///C:/Windows/Temp/abs_36kl66t_aw/croots/recipe/bcrypt_1659554334050/work
 beautifulsoup4 @ file:///C:/ci/beautifulsoup4_1650293025093/work
+bidict==0.22.1
 binaryornot @ file:///tmp/build/80754af9/binaryornot_1617751525010/work
 bitarray @ file:///C:/ci/bitarray_1657729621682/work
 bkcharts==0.2
@@ -119,7 +127,6 @@ future==0.18.3
 gast==0.4.0
 gcloud==0.18.3
 gensim @ file:///C:/ci/gensim_1646825438310/work
--e git+https://github.com/TencentARC/GFPGAN.git@2eac2033893ca7f427f4035d80fe95b92649ac56#egg=gfpgan
 gitdb==4.0.10
 GitPython==3.1.31
 glob2 @ file:///home/linux1/recipes/ci/glob2_1610991677669/work
@@ -292,6 +299,7 @@ Pillow==9.2.0
 pkginfo @ file:///tmp/build/80754af9/pkginfo_1643162084911/work
 pkgutil_resolve_name==1.3.10
 platformdirs @ file:///C:/b/abs_73cc5cz_1u/croots/recipe/platformdirs_1662711386458/work
+playsound==1.3.0
 plotly @ file:///C:/ci/plotly_1658142442431/work
 pluggy @ file:///C:/ci/pluggy_1648024580010/work
 plumbum==1.8.2
@@ -351,6 +359,7 @@ PySoundFile==0.9.0.post1
 pyspeech==0.0.0
 pytest==7.1.2
 python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
+python-engineio==4.8.0
 python-lsp-black @ file:///tmp/build/80754af9/python-lsp-black_1634232156041/work
 python-lsp-jsonrpc==1.0.0
 python-lsp-server @ file:///tmp/build/80754af9/python-lsp-server_1648176833691/work
@@ -358,6 +367,7 @@ python-multipart==0.0.6
 python-osc==1.8.3
 python-slugify @ file:///tmp/build/80754af9/python-slugify_1620405669636/work
 python-snappy @ file:///C:/ci/python-snappy_1610133405910/work
+python-socketio==5.10.0
 pytorch-lightning==1.5.0
 pytorch-metric-learning==2.3.0
 pytz==2023.3
@@ -408,6 +418,7 @@ sentencepiece==0.1.99
 service-identity @ file:///Users/ktietz/demo/mc3/conda-bld/service_identity_1629460757137/work
 shellingham==1.5.4
 simple-romp==1.0.8
+simple-websocket==1.0.0
 sip==4.19.13
 six==1.15.0
 smart-open @ file:///C:/ci/smart_open_1651235069716/work
@@ -470,12 +481,12 @@ toml @ file:///tmp/build/80754af9/toml_1616166611790/work
 tomli @ file:///C:/Windows/TEMP/abs_ac109f85-a7b3-4b4d-bcfd-52622eceddf0hy332ojo/croots/recipe/tomli_1657175513137/work
 tomlkit==0.12.0
 toolz==0.12.0
-torch==2.0.0
+torch==2.1.1+cu118
 torch-audiomentations==0.11.0
 torch-pitch-shift==1.2.4
-torchaudio==2.0.1
+torchaudio==2.1.1+cu118
 torchmetrics==1.2.0
-torchvision==0.15.1
+torchvision==0.16.1+cu118
 tornado==6.3.2
 tqdm==4.65.0
 traitlets @ file:///tmp/build/80754af9/traitlets_1636710298902/work
@@ -510,6 +521,7 @@ win-inet-pton @ file:///C:/ci/win_inet_pton_1605306162074/work
 win-unicode-console==0.5
 wincertstore==0.2
 wrapt==1.12.1
+wsproto==1.2.0
 xarray @ file:///opt/conda/conda-bld/xarray_1639166117697/work
 xlrd @ file:///tmp/build/80754af9/xlrd_1608072521494/work
 XlsxWriter @ file:///opt/conda/conda-bld/xlsxwriter_1649073856329/work
