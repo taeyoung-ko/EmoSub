@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -45,10 +46,8 @@
 
 <body>
     <div id="black-rectangle"></div>
-    <!--<video id="video-background" autoplay playsinline muted></video>-->
-    <video id="video-background" playsinline muted>
-        <source src="movie.mp4" type="video/mp4">
-    </video>
+    <video id="video-background" autoplay playsinline muted></video>
+
     <script src="data/leon.js"></script>
     <script src="data/util.js"></script>
     <script>
@@ -99,10 +98,6 @@
                 if (responseData.transcription){
                     leon.text = responseData.transcription;
                     console.log(`Received text: ${leon.text}`)
-                    if (leon.text !== 'Waiting for model loaded') {
-                        const video = document.getElementById('video-background');
-                        video.play(); // 비디오 재생
-                    }
                     if (responseData.emotion == "Angry"){
                         console.log(`Received emotion: ${responseData.emotion}`);
                         console.log()
@@ -166,13 +161,13 @@
 
         window.onload = () => {
             init();
-            /*initWebcam();*/
+            initWebcam();
             
             const blackRectangle = document.getElementById('black-rectangle');
             blackRectangle.style.width = leon.rect.w + 50 + 'px';
             blackRectangle.style.height = leon.rect.h + 20+'px';
         };
-/*
+
         function initWebcam() {
             const video = document.getElementById('video-background');
 
@@ -184,7 +179,6 @@
                     console.error('Error accessing webcam:', error);
                 });
         }
-        */
     </script>
 </body>
 
