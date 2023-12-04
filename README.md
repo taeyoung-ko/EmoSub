@@ -1,5 +1,10 @@
 # EmoSub
 
+### Environments
+1. Python 3.9.13
+2. PyTorch 2.1.1+cu118
+3. Tensorflow 2.10.0
+
 ### To run
 1. python server.py
 2. open front.html
